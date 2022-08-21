@@ -2,12 +2,13 @@ if SERVER then
     AddCSLuaFile()
 
     resource.AddFile("materials/vgui/ttt/dynamic/minigames/mg_icon.vmt")
+	resource.AddFile("sound/tttmg/mgsound.wav")
 end
 
 if CLIENT then
     EVENT.title = "title_minigame"
     EVENT.icon = Material("vgui/ttt/dynamic/minigames/mg_icon.vmt")
-    
+
     function EVENT:GetText()
         local mgText = {
             {

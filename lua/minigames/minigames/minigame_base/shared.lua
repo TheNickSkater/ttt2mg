@@ -36,13 +36,17 @@ function MINIGAME:Activate()
 	self:OnActivation()
 
 	self.m_bActive = true
-	
+
 	if SERVER then
 		events.Trigger(EVENT_MINIGAME, self) -- Trigger event for @{MINIGAME}
 	end
 
 	if CLIENT and GetConVar("ttt2_minigames_show_popup"):GetBool() then -- show popup if the @{MINIGAME} is activated
 		self:ShowActivationEPOP()
+	end
+
+	if CLIENT then
+		self:PlaySound()
 	end
 end
 
@@ -101,9 +105,16 @@ else
 				color = COLOR_ORANGE
 			},
 			self.lang.desc and LANG.TryTranslation("ttt2_minigames_" .. self.name .. "_desc") or nil,
-			12,
+			5,
 			nil,
-			true
+			false
 		)
+	end
+
+	---
+	--
+	-- @realm client
+	function MINIGAME:PlaySound()
+		surface.PlaySound("tttmg/mgsound.wav")
 	end
 end
